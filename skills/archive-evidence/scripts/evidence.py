@@ -33,8 +33,14 @@ def sha256(path):
 def wayback_latest(url, timeout=30):
     """Return (snapshot_url, timestamp) of the closest snapshot, or ('', '')."""
     q = "https://archive.org/wayback/available?url=" + urllib.parse.quote(url, safe="")
-    with urllib.request.urlopen(urllib.request.Request(q, headers=UA), timeout=timeout) as r:
-        snap = json.load(r).get("archived_snapshots", {}).get("closest") or {}
+    for attempt in (1, 2):
+        with urllib.request.urlopen(urllib.request.Request(q, headers=UA), timeout=timeout) as r:
+            data = json.load(r)
+        if not data.get("error"):
+            break
+    else:   # the service reports its own timeouts inside a normal reply; that is not "no snapshot"
+        raise OSError("the Wayback Machine did not answer in time; try again")
+    snap = (data.get("archived_snapshots") or {}).get("closest") or {}
     return (snap.get("url", ""), snap.get("timestamp", "")) if snap.get("available") else ("", "")
 
 
