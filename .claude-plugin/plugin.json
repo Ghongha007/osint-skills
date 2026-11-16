@@ -1,0 +1,8 @@
+{
+  "name": "osint-skills",
+  "description": "Verification and investigation skills for open-source journalists: geolocation, chronolocation, image verification, evidence archiving, claim attribution and network mapping.",
+  "version": "0.1.0",
+  "author": { "name": "OSINT JOURNO" },
+  "license": "MIT",
+  "keywords": ["osint", "journalism", "verification", "fact-checking"]
+}
