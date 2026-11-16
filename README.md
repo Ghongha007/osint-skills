@@ -82,4 +82,4 @@ python3 -m unittest discover -s tests
 
 ## Licence
 
-MIT. Made by [OSINT JOURNO](https://github.com/Ghongha007).
+MIT. Made by [OSINT JOURNO](https://github.com/OSINT-JOURNO).
